@@ -1,0 +1,417 @@
+4) Hierarchical inheritance
+===========================
+If we derived multiple class in the presence of one base class is called hierarchical inheritance.
+
+Diagram:
+		 A
+		  |
+	|-------------------------------|
+	B		   C
+
+ex:
+---
+class A 
+{
+	public void m1()
+	{
+		System.out.println("M1-Method");
+	}
+}
+class B extends A 
+{
+	public void m2()
+	{
+		System.out.println("M2-Method");
+	}
+}
+class C extends A 
+{
+	public void m3()
+	{
+		System.out.println("M3-Method");
+	}
+}
+class Test 
+{
+	public static void main(String[] args)
+	{
+		A a=new A();
+		a.m1();
+		
+		B b=new B();
+		b.m1();
+		b.m2();
+		
+		C c=new C();
+		c.m1();
+		c.m3();
+	}
+}
+
+5) Hybrid inheritance
+=======================
+It is a combination of more then one inheritance.
+
+Java does not support hybrid inheritance.
+
+Diagram:
+	                 A
+		|
+	|-------------------------------|
+	B		   C
+	|-------------------------------|
+		|		
+	                 D
+ 	
+
+
+Has-A relationship
+===================
+Has-A relationship is also known as composition and aggregation.
+
+There is no specific keyword to implements Has-A relationship but mostly we will use new operator.
+
+The main objective of Has-A relationship is to provide reusability.
+
+Has-A relationship will increase dependency between two components.
+
+ex:
+	class Trainer
+	{
+		
+	}
+	class Course
+	{
+		Trainer t=new Trainer();
+		-
+		-	
+	}
+
+ex:
+---
+class Ihub 
+{
+	public String courseName()
+	{
+		return "Full Stack Java + AWS";
+	}
+	public double courseFee()
+	{
+		return 30000d;
+	}
+	public String trainerName()
+	{
+		return "Niyaz Sir";
+	}
+}
+class Usha 
+{
+	public void getCourseDetails()
+	{
+		Ihub i=new Ihub();
+		System.out.println("Course Name :"+i.courseName());
+		System.out.println("Course Fee :"+i.courseFee());
+		System.out.println("Trainer Name :"+i.trainerName());
+	}
+}
+class Student 
+{
+	public static void main(String[] args)
+	{
+		Usha u=new Usha();
+		u.getCourseDetails();
+	}
+}
+
+composition
+============
+Without existing container object there is no chance of having contained object then the relationship between container and contained object is called composition which is strongly association.
+
+Diagram: class34.1
+
+
+aggregation
+============
+Without existing container object there is a chance of having contained object then the relationship between container and contained object is called aggregation which is loosely association.
+
+Diagram: class34.2
+
+
+
+Method overloading
+==================
+Having same method name with different parameters/signatures in a single class is called method overloading.
+
+All the methods present in a class are called overloaded methods.
+
+Method overloading will reduce complexity of the programming.
+
+Method resolution will taken care by a compiler based on reference type.
+
+ex:
+---
+class MeeSeva
+{
+	//overloaded methods
+	public void search(int voterId)
+	{
+		System.out.println("Details Found via voterId");
+	}
+	public void search(String houseNo)
+	{
+		System.out.println("Details Found via houseNo");
+	}
+	public void search(long aadharNo)
+	{
+		System.out.println("Details Found via aadharNo");
+	}
+}
+class Test 
+{
+	public static void main(String[] args)
+	{
+		MeeSeva ms=new MeeSeva();
+		ms.search(101);
+		ms.search("1-4-6/3");
+		ms.search(1234L);
+	}
+}
+
+Method overriding
+=================
+Having same method name with same parameters into two different classes is called method overriding.
+
+Methods which are present in parent class are called overridden methods.
+
+Methods which are present in child class are called overridding methods.
+
+Method resolution will taken care by JVM based on runtime object.
+
+ex:
+---
+class Parent 
+{
+	public void property()
+	{
+		System.out.println("Cash+Gold+Land+House");
+	}
+	public void marry()
+	{
+		System.out.println("Trisha");
+	}
+}
+class Child extends Parent 
+{
+	public void marry()
+	{
+		System.out.println("Rashmika");
+	}
+}
+class Test 
+{
+	public static void main(String[] args)
+	{
+		Parent p=new Parent();
+		p.property(); // Cash+Gold+land+House
+		p.marry(); // Trisha 
+		
+		Child c=new Child();
+		c.property(); // Cash+Gold+Land+House
+		c.marry(); // Rashmika
+		
+		Parent p1=new Child();
+		p1.property(); // Cash+Gold+Land+House
+		p1.marry(); // Rashmika
+		
+	}
+}
+
+If we declare any method as final then overridding of that method is not possible.
+
+ex:
+---
+class Parent 
+{
+	//overridden methods 
+	public void property()
+	{
+		System.out.println("Cash+Gold+Land+House");
+	}
+	public final void marry()
+	{
+		System.out.println("Trisha");
+	}
+}
+class Child extends Parent 
+{
+	//overridding methods
+	public void marry()
+	{
+		System.out.println("Rashmika");
+	}
+}
+class Test 
+{
+	public static void main(String[] args)
+	{
+		Parent p=new Parent();
+		p.property(); // Cash+Gold+land+House
+		p.marry(); // Trisha 
+		
+		Child c=new Child();
+		c.property(); // Cash+Gold+Land+House
+		c.marry(); // Rashmika
+		
+		Parent p1=new Child();
+		p1.property(); // Cash+Gold+Land+House
+		p1.marry(); // Rashmika
+		
+	}
+}
+
+If parent don't want to share any properties to child class then we need to declare variables and methods as private.
+
+Private methods can't be override.
+
+ex:
+
+class Parent 
+{
+	//overridden methods 
+	private void property()
+	{
+		System.out.println("father property");
+	}
+}
+class Child extends Parent 
+{
+	//overridding methods
+	public void property()
+	{
+		System.out.println("child property");
+	}
+}
+class Test 
+{
+	public static void main(String[] args)
+	{
+		Parent p=new Parent();
+		p.property(); // Cash+Gold+land+House
+		
+		
+		Child c=new Child();
+		c.property(); // Cash+Gold+Land+House
+		
+	}
+}
+
+
+Q) Can we overload main method in java?
+
+Yes, we can overload main method in java but JVM always execute main method with String[] parameter only.
+
+ex:
+
+class Test 
+{
+	public static void main(String[] args)
+	{
+		System.out.println("String arg method");
+	}
+	public static void main(int[] iargs)
+	{
+		System.out.println("int arg method");
+	}
+}
+
+Method Hiding
+===========
+Method hiding is exactly same as method overriding with following differences.
+
+Method Overriding 				Method Hiding
+-------------------				---------------
+All methods present in method overriding 	All methods present in method hiding must be 
+must be non-static.				static.
+
+Method resolution will taken care by		Method resolution will taken care by compiler based 
+JVM based on runtime object.			on reference type.
+
+It is also known as dynamic polymorphism,	It is also known as static polymorphism, compile time
+runtime polymorphism or late binding.		polymorphism or late binding.
+
+
+class Parent 
+{
+	public static void property()
+	{
+		System.out.println("Cash+Gold+Land+House");
+	}
+	public static void marry()
+	{
+		System.out.println("Trisha");
+	}
+}
+class Child extends Parent 
+{
+	public static void marry()
+	{
+		System.out.println("Rashmika");
+	}
+}
+class Test 
+{
+	public static void main(String[] args)
+	{
+		Parent p=new Parent();
+		p.property(); // Cash+Gold+land+House
+		p.marry(); // Trisha 
+		
+		Child c=new Child();
+		c.property(); // Cash+Gold+Land+House
+		c.marry(); // Rashmika
+		
+		Parent p1=new Child();
+		p1.property(); // Cash+Gold+Land+House
+		p1.marry(); // Trisha 
+		
+	}
+}
+
+
+Q) Can we override main method in java?
+
+No, we can't override main method in java because it is static.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
